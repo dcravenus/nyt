@@ -59,6 +59,18 @@ const ArticleList = () => {
         const bDate = new Date(b.isoDate);
         return bDate - aDate;
       });
+
+      //Remove duplicates
+      const guids = [];
+      newArticles = newArticles.filter((article, index) => {
+        if (guids.includes(article.guid)) {
+          return false;
+        } else {
+          guids.push(article.guid);
+          return true;
+        }
+      });
+
       setArticles(newArticles);
     });
   }, []);
